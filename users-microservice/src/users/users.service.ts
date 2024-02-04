@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entity/users.entitiy';
 import { Repository } from 'typeorm';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { RegisterUserDto } from './dto/users.dto';
+import { GetUserDto, RegisterUserDto } from './dto/users.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -81,5 +81,11 @@ export class UsersService {
     }
 
     return { valid: true };
+  }
+
+  async getUser(getUserDto: GetUserDto): Promise<User> {
+    return await this.userRepository.findOne({
+      where: { email: getUserDto.email },
+    });
   }
 }

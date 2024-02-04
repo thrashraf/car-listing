@@ -3,3 +3,7 @@ export class RegisterUserDto {
   password: string;
   email: string;
 }
+
+export class GetUserDto {
+  email: string;
+}

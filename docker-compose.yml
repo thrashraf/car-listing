@@ -14,7 +14,7 @@ services:
     volumes:
       - ./users-microservice/src:/usr/src/app/src
     command: pnpm run start:dev
-  
+
   nats:
     image: nats
     ports:
