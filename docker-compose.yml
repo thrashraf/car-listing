@@ -15,6 +15,12 @@ services:
       - ./users-microservice/src:/usr/src/app/src
     command: pnpm run start:dev
 
+  car_microservice:
+    build:  ./car-microservice
+    volumes:
+      - ./car-microservice/src:/usr/src/app/src
+    command: pnpm run start:dev
+
   nats:
     image: nats
     ports:
