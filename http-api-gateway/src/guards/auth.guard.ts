@@ -7,11 +7,8 @@ export class AuthGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
 
     try {
-      const token = req.headers.authorization.split(' ')[1];      
-      const decoded = JWT.verify(token, 'thisIsASecretKey');
-      console.log(decoded, 'decoded');
-
-      return true;
+      const token = req.headers.authorization.split(' ')[1];
+      return JWT.verify(token, 'thisIsASecretKey');
     } catch (err) {
       Logger.error(err);
       return false;
