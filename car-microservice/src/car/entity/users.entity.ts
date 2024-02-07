@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Booking } from './booking.entity';
 
-@Entity({ name: 'car' })
-export class Car {
+@Entity({ name: 'user' })
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,22 +19,12 @@ export class Car {
   name: string;
 
   @Column({ nullable: false })
-  model: string;
+  email: string;
 
   @Column({ nullable: false })
-  year: string;
+  password: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
-  pricePerDay: number;
-
-  @Column({ nullable: false })
-  available: boolean;
-
-  @Column({ nullable: false })
-  userId: string;
-
-  /** ==================== RELATION ========================= */
-
-  @OneToMany(() => Booking, (booking) => booking.car)
+  /** ============= RELATION ============================= */
+  @OneToMany(() => Booking, (booking) => booking.user)
   bookings: Booking[];
 }

@@ -19,7 +19,9 @@ services:
     build:  ./car-microservice
     volumes:
       - ./car-microservice/src:/usr/src/app/src
-    command: pnpm run start:dev
+    depends_on:
+      - mysql_db  # Ensure the MySQL database is running
+    command: sh -c "pnpm run typeorm:run && pnpm run seed && pnpm run start:dev"  # Run TypeORM migrations and seed script
 
   nats:
     image: nats

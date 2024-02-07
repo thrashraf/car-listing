@@ -2,19 +2,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CarModule } from './car/car.module';
 import { Car } from './car/entity/car.entity';
+import { User } from './car/entity/users.entity';
+import { Booking } from './car/entity/booking.entity';
+import typeOrmConfig from '../ormconfig';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'mysql_db',
-      port: 3306,
-      database: 'car_listing',
-      username: 'admin',
-      password: 'root',
-      synchronize: true,
-      entities: [Car],
-    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
+    TypeOrmModule.forFeature([Car, User, Booking]),
     CarModule,
   ],
   controllers: [],
