@@ -4,7 +4,7 @@ import { Booking } from './src/car/entity/booking.entity';
 
 const typeOrmConfig: any = {
   type: 'mysql',
-  host: 'mysql_db',
+  host: '172.20.10.3',
   port: 3306,
   database: 'car_listing',
   username: 'admin',

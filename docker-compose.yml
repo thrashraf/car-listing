@@ -21,7 +21,7 @@ services:
       - ./car-microservice/src:/usr/src/app/src
     depends_on:
       - mysql_db  # Ensure the MySQL database is running
-    command: sh -c "pnpm run typeorm:run && pnpm run seed && pnpm run start:dev"  # Run TypeORM migrations and seed script
+    command: sh -c "/wait-for-it.sh mysql_db:3306 --strict --timeout=300 && pnpm run start:dev"  # Run TypeORM migrations and seed script
 
   nats:
     image: nats
