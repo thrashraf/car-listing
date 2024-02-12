@@ -4,7 +4,7 @@ import { CarModule } from './car/car.module';
 import { Car } from './car/entity/car.entity';
 import { User } from './car/entity/users.entity';
 import { Booking } from './car/entity/booking.entity';
-import typeOrmConfig from './config/typeorm.config-migrations';
+import { typeOrmConfig } from './config/typeorm.config';
 
 @Module({
   imports: [

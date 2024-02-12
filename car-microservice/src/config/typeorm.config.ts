@@ -10,16 +10,13 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
     return {
       type: 'mysql',
-      host: 'mysql_db',
+      host: '192.168.0.54',
       port: 3306,
       username: 'admin',
       database: 'car_listing',
       password: 'root',
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
       migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
-      // cli: {
-      //   migrationsDir: __dirname + '/../database/migrations',
-      // },
       extra: {
         charset: 'utf8mb4_unicode_ci',
       },
@@ -33,17 +30,14 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'mysql',
   host: 'mysql_db',
   port: 3306,
-  username: 'admin',
   database: 'car_listing',
+  username: 'admin',
   password: 'root',
+  synchronize: true,
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
-  // cli: {
-  //   migrationsDir: __dirname + '/../database/migrations',
-  // },
   extra: {
     charset: 'utf8mb4_unicode_ci',
   },
-  synchronize: false,
   logging: true,
 };
