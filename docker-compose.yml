@@ -19,7 +19,7 @@ services:
     build:  ./car-microservice
     volumes:
       - ./car-microservice/src:/usr/src/app/src
-    command: pnpm run seed:run && pnpm run start:dev
+    command: pnpm run start:dev
 
   nats:
     image: nats

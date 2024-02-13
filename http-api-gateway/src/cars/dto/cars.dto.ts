@@ -1,24 +1,35 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString, Max, Min } from 'class-validator';
+import {
+  IsDateString,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 
-export class getCarsDto {
+export class GetCarsDto {
+  @IsOptional()
   @IsString()
   name?: string;
 
+  @IsOptional()
   @IsString()
   model?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsDateString()
-  startDate: string;
+  startDate?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsDateString()
-  endDate: string;
+  endDate?: string;
 
+  @IsOptional()
   @IsNumber()
   @Min(0)
   minPrice?: number;
 
+  @IsOptional()
   @IsNumber()
   @Max(1000000)
   maxPrice?: number;

@@ -1,5 +1,3 @@
-// src/bookings/entities/booking.entity.ts
-
 import {
   Entity,
   Column,
@@ -32,6 +30,9 @@ export class Booking {
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   totalPrice: number;
+
+  @Column({ type: 'string', nullable: false })
+  carId: number;
 
   /** ========== RELATION ========== */
 
