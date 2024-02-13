@@ -2,7 +2,7 @@ import { Controller, Post, Inject, UseGuards, Body } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { GetCarsDto } from './dto/cars.dto';
+import { BookingCarDto, GetCarsDto } from './dto/cars.dto';
 
 @Controller('cars')
 export class CarsController {
@@ -10,12 +10,23 @@ export class CarsController {
 
   @UseGuards(AuthGuard)
   @Post('get')
-  greet(@Body() getCarsDto: GetCarsDto): Observable<any> {
+  getCars(@Body() getCarsDto: GetCarsDto): Observable<any> {
     return this.client.send(
       {
         cmd: 'get_cars',
       },
       getCarsDto,
+    );
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('booking-car')
+  bookingCar(@Body() BookingCarDto: BookingCarDto): Observable<any> {
+    return this.client.send(
+      {
+        cmd: 'booking_car',
+      },
+      BookingCarDto,
     );
   }
 }

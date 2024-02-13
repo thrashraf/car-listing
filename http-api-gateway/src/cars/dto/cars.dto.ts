@@ -1,5 +1,6 @@
 import {
   IsDateString,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -33,4 +34,22 @@ export class GetCarsDto {
   @IsNumber()
   @Max(1000000)
   maxPrice?: number;
+}
+
+export class BookingCarDto {
+  @IsString()
+  @IsNotEmpty()
+  carId: string;
+
+  @IsDateString()
+  @IsNotEmpty()
+  startDate: string;
+
+  @IsDateString()
+  @IsNotEmpty()
+  endDate: string;
+
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
 }

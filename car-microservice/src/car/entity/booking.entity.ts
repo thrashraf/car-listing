@@ -10,8 +10,8 @@ import { User } from './users.entity';
 
 @Entity('bookings')
 export class Booking {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
@@ -32,7 +32,10 @@ export class Booking {
   totalPrice: number;
 
   @Column({ type: 'string', nullable: false })
-  carId: number;
+  carId: string;
+
+  @Column({ type: 'string', nullable: false })
+  userId: string;
 
   /** ========== RELATION ========== */
 

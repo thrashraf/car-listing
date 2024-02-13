@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { Car } from './entity/car.entity';
-import { GetCarsDto } from './dto/car.dto';
+import { BookingCarDto, GetCarsDto } from './dto/car.dto';
 import { Booking } from './entity/booking.entity';
 import * as moment from 'moment';
 
@@ -62,5 +62,45 @@ export class CarService {
     }
 
     return await query.getMany();
+  }
+
+  async bookingCar(bookingCarDto: BookingCarDto) {
+    try {
+      const { carId, startDate, endDate } = bookingCarDto;
+
+      const car = await this.carRepository.findOne({
+        where: { id: carId },
+        relations: ['bookings'],
+      });
+
+      if (!car) {
+        throw new Error('Car not found');
+      }
+
+      const isCarAvailable = car.bookings.every(
+        (booking) =>
+          moment(booking.startDate).isAfter(moment(endDate)) ||
+          moment(booking.endDate).isBefore(moment(startDate)),
+      );
+
+      if (!isCarAvailable) {
+        throw new Error('Car is not available');
+      }
+
+      const durationInHours = moment(endDate).diff(moment(startDate), 'hours');
+      const hourlyRate = car.pricePerDay / 24; // Assuming pricePerDay is for a full day
+      const totalPrice = durationInHours * hourlyRate;
+
+      const booking = new Booking();
+      booking.car = car;
+      booking.startDate = moment(startDate).toDate();
+      booking.endDate = moment(endDate).toDate();
+      booking.userId = bookingCarDto.userId;
+      booking.totalPrice = Number(totalPrice.toFixed(2));
+
+      return await this.bookingRepository.save(booking);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }
