@@ -4,4 +4,4 @@ echo "Pulling from main"
 git pull
 
 echo "Building application"
-docker compose up --build -d
+docker-compose -f docker-compose.prod.yml up -d
